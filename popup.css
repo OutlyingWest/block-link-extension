@@ -1,0 +1,4 @@
+html {
+    height: 150px;  /* Set the height and width here. It must be larger */
+    width: 400px;   /* than 25*25 but smaller than 800*600. */
+  }
