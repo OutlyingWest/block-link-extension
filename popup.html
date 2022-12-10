@@ -13,17 +13,38 @@
                         <h4>Link blocker</h4>
                     </div>
                     <div class="mb-3">
-                        <label for="LinksTextarea" class="form-label">Add your links for blocking below</label>
-                        <textarea class="form-control" id="LinksTextarea" rows="3"></textarea>
+                        <label for="addLink" class="form-label">Add your link for blocking below</label>
+                        <input type="text" class="form-control" id="addLink" placeholder="http://example.com">
                     </div>
                     <div class="mb-3">
-                        <button type="button" id="submit" class="btn btn-dark">Add links</button>
+                        <button type="button" id="submit" class="btn btn-dark">Add link</button>
+                    </div>
+                    <div class="mb-3">
+                        <label for="linksTextArea" class="form-label">List of links for blocking</label>
+                        <textarea class="form-control" id="linksTextArea" name="textareaLinks" placeholder="ID : URL-link" rows="3"></textarea>
+                    </div>
+                    <div class="row nav-fill g-1">
+                        <div class="col">
+                            <div class="mb-3">
+                                <button type="button" id="update" class="btn btn-dark">Update links</button>
+                            </div>
+                        </div>
+                        <div class="col col-8">
+                            <div class="input-group ml-0">
+                                <button type="button" id="deleteByID" class="btn btn-dark">Delete by ID</button>
+                                <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="deleteByID">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 d-grid">
+                        <button type="button" id="deleleALL" class="btn btn-dark">Delete all links</button>
                     </div>
                 </div>      
             </div>
         </div>
+        <p id="debug"></p>
 
         <script src="popup.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script> -->
     </body>
 </html>
