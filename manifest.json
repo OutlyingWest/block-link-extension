@@ -12,7 +12,11 @@
     "action": {
         "default_popup":"popup.html"
     },
-    "permissions": ["tabs", "url"],
+    "permissions": [
+        "tabs",
+        "url",
+        "storage"
+    ],
     "background": {
         "service_worker": "background.js"
     }
