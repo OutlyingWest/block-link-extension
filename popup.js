@@ -11,16 +11,13 @@ getDate.addEventListener("click",() => {
     var link = document.getElementById("addLink").value;
     
     // Save link to storage
-    //localStorage.setItem(linkInd, link);
     chrome.storage.sync.set({[linkInd]: String(link)});
-
+    document.getElementById("debug").innerHTML = "new link with id: " + linkInd +" added";
     // Save new link index into localStorage
     linkIndInt = parseInt(linkInd, 10);
     linkIndInt += 1;
     linkInd = String(linkIndInt);
     localStorage.setItem('linkInd', linkInd);
-
-    // document.getElementById("debug").innerHTML = links;
 })
 
 const updateDate = document.getElementById("update");
@@ -33,22 +30,25 @@ updateDate.addEventListener("click",() => {
             document.getElementById("linksTextArea").innerHTML += key + ' : ' + String(link) + "\n";
         }
     });
-    // document.getElementById("debug").innerHTML = "HEllo";
+    document.getElementById("debug").innerHTML = "links updated";
 })
 
 
 
 const deleteByIdDate = document.getElementById("deleteByID");
 deleteByIdDate.addEventListener("click",() => {
-
-     localStorage.clear();
-     chrome.storage.local.remove(["key"],function(){
+    var id = document.getElementById("forDeleteId").value;
+     chrome.storage.sync.remove([id],function(){
         var error = chrome.runtime.lastError;
            if (error) {
                console.error(error);
            }
        })
-    // document.getElementById("debug").innerHTML = "HElloDeleteAll";
+    if (id) {
+        document.getElementById("debug").innerHTML = "link with id: " + id + " deleted";
+    } else {
+        document.getElementById("debug").innerHTML = "id for delete is not set";
+    }
 })
 
 
@@ -57,6 +57,6 @@ const deleteAllDate = document.getElementById("deleleALL");
 deleteAllDate.addEventListener("click",() => {
     chrome.storage.sync.clear();
     localStorage.clear();
-    document.getElementById("debug").innerHTML = "HElloDeleteAll";
     chrome.storage.sync.set({compare: false});
+    document.getElementById("debug").innerHTML = "all links deleted";
 })
