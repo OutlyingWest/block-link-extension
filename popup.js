@@ -10,8 +10,9 @@ getDate.addEventListener("click",() => {
     // Add new link to link var
     var link = document.getElementById("addLink").value;
     
-    // Save to storage
-    localStorage.setItem(linkInd, link);
+    // Save link to storage
+    //localStorage.setItem(linkInd, link);
+    chrome.storage.sync.set({[linkInd]: String(link)});
 
     // Save new link index into localStorage
     linkIndInt = parseInt(linkInd, 10);
@@ -26,12 +27,12 @@ const updateDate = document.getElementById("update");
 updateDate.addEventListener("click",() => {
     // clearing textarea
     document.getElementById("linksTextArea").innerHTML = '';
-    // Output all links to textarea
-    for(var key in localStorage){
-        if(localStorage.hasOwnProperty(key) && key !== "linkInd") {
-            document.getElementById("linksTextArea").innerHTML += '  ' + key + ' : ' + localStorage.getItem(key) + "\n";
+
+    chrome.storage.sync.get(all => {
+        for (const [key, link] of Object.entries(all)) {
+            document.getElementById("linksTextArea").innerHTML += key + ' : ' + String(link) + "\n";
         }
-     }
+    });
     // document.getElementById("debug").innerHTML = "HEllo";
 })
 
@@ -41,6 +42,12 @@ const deleteByIdDate = document.getElementById("deleteByID");
 deleteByIdDate.addEventListener("click",() => {
 
      localStorage.clear();
+     chrome.storage.local.remove(["key"],function(){
+        var error = chrome.runtime.lastError;
+           if (error) {
+               console.error(error);
+           }
+       })
     // document.getElementById("debug").innerHTML = "HElloDeleteAll";
 })
 
@@ -48,6 +55,8 @@ deleteByIdDate.addEventListener("click",() => {
 
 const deleteAllDate = document.getElementById("deleleALL");
 deleteAllDate.addEventListener("click",() => {
-     localStorage.clear();
+    chrome.storage.sync.clear();
+    localStorage.clear();
     document.getElementById("debug").innerHTML = "HElloDeleteAll";
+    chrome.storage.sync.set({compare: false});
 })
