@@ -24,7 +24,7 @@ const updateDate = document.getElementById("update");
 updateDate.addEventListener("click",() => {
     // clearing textarea
     document.getElementById("linksTextArea").innerHTML = '';
-
+    // Get all links from sync storage
     chrome.storage.sync.get(all => {
         for (const [key, link] of Object.entries(all)) {
             document.getElementById("linksTextArea").innerHTML += key + ' : ' + String(link) + "\n";
@@ -37,6 +37,7 @@ updateDate.addEventListener("click",() => {
 
 const deleteByIdDate = document.getElementById("deleteByID");
 deleteByIdDate.addEventListener("click",() => {
+    // Get id for delete from popur.html
     var id = document.getElementById("forDeleteId").value;
      chrome.storage.sync.remove([id],function(){
         var error = chrome.runtime.lastError;
@@ -55,8 +56,9 @@ deleteByIdDate.addEventListener("click",() => {
 
 const deleteAllDate = document.getElementById("deleleALL");
 deleteAllDate.addEventListener("click",() => {
+    // Clear sync google storage
     chrome.storage.sync.clear();
+    // Clear a local storage
     localStorage.clear();
-    chrome.storage.sync.set({compare: false});
     document.getElementById("debug").innerHTML = "all links deleted";
 })
